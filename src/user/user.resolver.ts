@@ -14,6 +14,7 @@ import { ActivityType, Affiliate, User } from '../graphql';
 import { CurrentUser } from './user.decorator';
 import { ActivityService } from '../activity/activity.service';
 import { AffiliateService } from '../affiliate/affiliate.service';
+import { pubSub } from '../activity/activity.resolver';
 
 @Resolver('User')
 export class UserResolver {
@@ -51,10 +52,15 @@ export class UserResolver {
     });
 
     if (user) {
-      await this.activityService.create({
+      const activity = await this.activityService.create({
         user: user.id,
         type: ActivityType.CREATED,
       });
+
+      if(activity){
+        pubSub.publish('activityCreated', { activityCreated: activity });
+      }
+      
     }
 
     return user;

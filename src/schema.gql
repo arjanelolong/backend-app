@@ -63,3 +63,8 @@ type Mutation {
     createUser(input: UserInput!): User!
     login(input: LoginInput!): String!
 }
+
+
+type Subscription {
+  activityCreated: Activity!
+}

@@ -19,6 +19,12 @@ import { AffiliateModule } from './affiliate/affiliate.module';
         path: join(process.cwd(), './graphql.ts'),
       },
       playground: process.env.ENVIRONMENT === 'production' ? false : true,
+      installSubscriptionHandlers: true,
+      subscriptions: {
+        'subscriptions-transport-ws': {
+          path: '/graphql'
+        }
+      },
     }),
     UserModule,
     AuthModule,

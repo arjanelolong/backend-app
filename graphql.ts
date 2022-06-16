@@ -69,6 +69,10 @@ export interface IMutation {
     login(input: LoginInput): string | Promise<string>;
 }
 
+export interface ISubscription {
+    activityCreated(): Activity | Promise<Activity>;
+}
+
 export type DateTime = any;
 export type JSON = any;
 type Nullable<T> = T | null;
