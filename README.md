@@ -138,3 +138,21 @@ query($input: ExchangeFilterInput! ){
     }
 }
 ```
+
+### Activity Subscription
+
+```
+subscription{
+  activityCreated{
+    id
+    type
+    user{
+      username
+    }
+    createdAt
+  }
+}
+
+Subscription URL
+ws://localhost:3000/graphql 
+```
