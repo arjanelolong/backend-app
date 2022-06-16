@@ -81,6 +81,18 @@ describe('UserResolver', () => {
       );
     });
 
+    it('should create user without affiliate', async () => {
+      const user = generateUser();
+      const response = await resolver.createUser(R.pick(['username', 'password'], user)); 
+
+      expect(R.pick(['username', 'password','affiliate'], response)).toEqual(
+        {
+          ...R.pick(['username', 'password'], user),
+          affiliate: null,
+        }
+      );
+    });
+
     it('should not create user with the same username', async () => {
       await expect(resolver.createUser(R.pick(['username', 'password'], users[0]))).rejects.toThrow();
     });
