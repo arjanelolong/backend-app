@@ -73,7 +73,7 @@ mutation($input: UserInput!){
 ### Login
 
 ```
-mutation($input: UserInput!){
+mutation($input: LoginInput!){
   login(input: $input)
 }
 
