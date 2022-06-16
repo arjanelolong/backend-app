@@ -1,0 +1,65 @@
+
+scalar DateTime
+scalar JSON
+
+type Affiliate {
+  id: ID!
+  code: String!
+  name: String!
+}
+
+type User {
+  id: ID!
+  username: String!
+  password: String!
+  affiliate: Affiliate
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+enum ActivityType {
+  CREATED
+  LOGIN
+}
+
+type Activity {
+  id: ID!
+  type: ActivityType!
+  user: User!
+  createdAt: DateTime!
+}
+
+input UserInput {
+  username: String!
+  password: String!
+  affiliateCode: String
+}
+
+input LoginInput {
+  username: String!
+  password: String!
+}
+
+input AffiliateInput {
+  name: String!
+}
+
+input ExchangeFilterInput {
+  currencyCode: String!
+  date: DateTime
+}
+
+type Query {
+    hello: String!
+    me: User!
+    activities: [Activity]
+    exchange(input: ExchangeFilterInput): JSON
+    affiliate(id: ID): Affiliate
+    affiliates: [Affiliate] 
+}
+
+type Mutation {
+    createAffiliate(input: AffiliateInput): Affiliate!
+    createUser(input: UserInput!): User!
+    login(input: LoginInput!): String!
+}
