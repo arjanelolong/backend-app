@@ -49,7 +49,7 @@ describe('UserResolver', () => {
       ],
     }).compile();
 
-    users =  await Promise.all(R.times(async () => generateUser())(5));
+    users =  R.times(() => generateUser())(5);
     affiliate = generateAffiliate();
     resolver = module.get<UserResolver>(UserResolver);
   });
